@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#sidebar {
+  width: 250px;
+  background: #f3f3f3;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+#sidebar .item {
+  padding: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#sidebar .item:hover {
+  background: #e1e1e1;
+}
+
+#content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.status-open {
+  border-left: 5px solid red;
+}
+
+.status-closed {
+  border-left: 5px solid green;
+}
+
+.status-ongoing {
+  border-left: 5px solid blue;
+}
+
+/* Modal backdrop */
+#login-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal box */
+#login-modal {
+  background: white;
+  border-radius: 6px;
+  padding: 20px;
+  width: 300px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+#login-modal input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+
+#login-modal button {
+  width: 100%;
+  padding: 8px;
+  cursor: pointer;
+}
