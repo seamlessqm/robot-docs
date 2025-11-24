@@ -1,15 +1,20 @@
 let globalDocs = null;
 
 async function loadDocs() {
-    try {
-        const data = await fetch("data.enc").then(r => r.json());
-        globalDocs = data.docs;
-        loadSidebar(globalDocs);
-        if(globalDocs.length > 0) showDoc(globalDocs[0]);
-    } catch (err) {
-        console.error("Failed to load docs", err);
+  try {
+    const data = await fetch(
+      "data.enc", {
+      cache: "no-store"
     }
+    ).then(r => r.json());
+    globalDocs = data.docs;
+    loadSidebar(globalDocs);
+    if (globalDocs.length > 0) showDoc(globalDocs[0]);
+  } catch (err) {
+    console.error("Failed to load docs", err);
+  }
 }
+
 
 function onLoginSubmit() {
     const password = document.getElementById("password-input").value;
