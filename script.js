@@ -22,7 +22,9 @@ let globalDocs = null;
           key,
           combined
         );
-        return new TextDecoder().decode(decrypted);
+        const decryptedText =  new TextDecoder().decode(decrypted);
+          console.log(decryptedText)
+          return decryptedText
       } catch (e) {
         return null;
       }
