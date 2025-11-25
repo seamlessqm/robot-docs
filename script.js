@@ -1,19 +1,55 @@
 let globalDocs = null;
 
-async function loadDocs() {
-  try {
-    const data = await fetch(
-      "data.enc", {
-      cache: "no-store"
+    async function decryptMinimal(encObj, password) {
+      const nonce = Uint8Array.from(atob(encObj.nonce), c => c.charCodeAt(0));
+      const combined = Uint8Array.from(atob(encObj.data), c => c.charCodeAt(0));
+
+      const keyBytes = await crypto.subtle.digest("SHA-256",
+        new TextEncoder().encode(password)
+      );
+
+      const key = await crypto.subtle.importKey(
+        "raw",
+        keyBytes,
+        "AES-GCM",
+        false,
+        ["decrypt"]
+      );
+
+      try {
+        const decrypted = await crypto.subtle.decrypt(
+          {name: "AES-GCM", iv: nonce},
+          key,
+          combined
+        );
+        return new TextDecoder().decode(decrypted);
+      } catch (e) {
+        return null;
+      }
     }
-    ).then(r => r.json());
+
+
+async function loadDocs(password) {
+  try {
+    const enc = await fetch("data.enc", { cache: "no-store" }).then(r => r.json());
+
+    const decrypted = await decryptMinimal(enc, password);
+
+    if (!decrypted) {
+      throw new Error("Wrong password");
+    }
+
+    const data = JSON.parse(decrypted);
+
     globalDocs = data.docs;
     loadSidebar(globalDocs);
     if (globalDocs.length > 0) showDoc(globalDocs[0]);
+
   } catch (err) {
     console.error("Failed to load docs", err);
   }
 }
+
 
 
 function onLoginSubmit() {
@@ -25,7 +61,7 @@ function onLoginSubmit() {
 
     document.getElementById("login-backdrop").style.display = "none";
 
-    loadDocs();
+    loadDocs(password);
 }
 
 function loadSidebar(docs) {
