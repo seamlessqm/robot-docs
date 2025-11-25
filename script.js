@@ -43,7 +43,7 @@ async function loadDocs(password) {
 
     const data = JSON.parse(decrypted);
 
-    globalDocs = data.docs;
+    globalDocs = data.data;
     loadSidebar(globalDocs);
     if (globalDocs.length > 0) showDoc(globalDocs[0]);
 
