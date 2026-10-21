@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Download Test</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; line-height: 1.5; }
+    li { margin: 8px 0; }
+    code { background: #f2f2f2; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Download test</h1>
+  <p>
+    Test page for the robot repo's download step (<code>xx Download Files</code>).
+    Each link saves a small dummy file; the <code>download</code> attribute sets
+    the name the browser saves it under. The names include spaces, brackets and
+    umlauts on purpose.
+  </p>
+  <ul>
+    <li><a data-test="download_antrag_pdf" href="download-test/antrag.pdf" download="Antrag 2026 (Kopie).pdf">Antrag 2026 (Kopie).pdf</a></li>
+    <li><a data-test="download_uebersicht_xml" href="download-test/uebersicht.xml" download="Übersicht.xml">Übersicht.xml</a></li>
+    <li><a data-test="download_bescheid_zip" href="download-test/bescheid.zip" download="bescheid.zip">bescheid.zip</a> (contains <code>Bescheid Teil 1.xml</code>)</li>
+    <li><a data-test="download_label_pdf" href="download-test/label.pdf" download="label.pdf">label.pdf</a></li>
+  </ul>
+</body>
+</html>
